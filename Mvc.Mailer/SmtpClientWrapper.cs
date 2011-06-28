@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel;
 using System.Net.Mail;
-using System.ComponentModel;
 
 namespace Mvc.Mailer
 {
@@ -27,10 +23,7 @@ namespace Mvc.Mailer
 
         public override void Send(MailMessage mailMessage)
         {
-            using (InnerSmtpClient)
-            {
-                InnerSmtpClient.Send(mailMessage);
-            }
+            this.InnerSmtpClient.Send(mailMessage);
         }
 
         public override void SendAsync(MailMessage mailMessage, object userState)
@@ -41,13 +34,12 @@ namespace Mvc.Mailer
 
         void InnerSmtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            (sender as SmtpClient).Dispose();
-            OnSendCompleted(sender, e);
+            base.OnSendCompleted(sender, e);
         }
 
         public override void Dispose()
         {
-            InnerSmtpClient.Dispose();
+            this.InnerSmtpClient = null;
         }
 
         public static implicit operator SmtpClientWrapper(SmtpClient innerSmtpClient)

@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mvc.Mailer</RootNamespace>
     <AssemblyName>Mvc.Mailer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -36,10 +36,13 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -66,35 +69,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
-    <None Include="NuGet\input\tools\cs\IMailerMethodTemplate.cs.t4" />
-    <None Include="NuGet\input\tools\cs\MailerMethodTemplate.cs.t4" />
-    <None Include="NuGet\input\tools\Mailer.Aspx.ps1" />
-    <None Include="NuGet\input\tools\Mailer.Razor.ps1" />
-    <None Include="NuGet\input\tools\Install.ps1" />
-    <None Include="NuGet\input\tools\cs\IMailerTemplate.cs.t4" />
-    <None Include="NuGet\input\tools\cs\MailerTemplate.cs.t4" />
-    <None Include="NuGet\input\tools\MailerFunctions.ps1" />
-    <None Include="NuGet\input\tools\view\aspx\Mail.text.aspx.cs.t4" />
-    <None Include="NuGet\input\tools\view\aspx\Layout.text.Master.cs.t4" />
-    <None Include="NuGet\input\tools\view\aspx\Layout.Master.cs.t4" />
-    <None Include="NuGet\input\tools\view\aspx\Mail.aspx.cs.t4" />
-    <None Include="NuGet\input\tools\view\razor\Layout.text.cshtml.cs.t4" />
-    <None Include="NuGet\input\tools\view\razor\Mail.text.cshtml.cs.t4" />
-    <None Include="NuGet\input\tools\view\razor\Layout.cshtml.cs.t4" />
-    <None Include="NuGet\input\tools\view\razor\Mail.cshtml.cs.t4" />
-    <None Include="NuGet\MvcMailer.nuspec">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy *.dll "$(ProjectDir)NuGet\input\lib\40"
-xcopy content "$(ProjectDir)NuGet\input\content" /S /Y
-cd "$(ProjectDir)NuGet"
-IF NOT EXIST output md output
-nuget pack mvcmailer.nuspec -b input -o output
-</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

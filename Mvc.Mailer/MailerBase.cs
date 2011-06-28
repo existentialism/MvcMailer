@@ -15,7 +15,6 @@ namespace Mvc.Mailer
     /// </summary>
     public class MailerBase : ControllerBase
     {
-
         /// <summary>
         /// The parameterless constructor
         /// </summary>
@@ -69,7 +68,6 @@ namespace Mvc.Mailer
         /// <returns>the raw html content of the email view and its master page</returns>
         public virtual string EmailBody(string viewName, string masterName=null)
         {
-
             masterName = masterName ?? MasterName;
          
             var result = new StringResult
@@ -78,8 +76,10 @@ namespace Mvc.Mailer
                 ViewData = ViewData,               
                 MasterName = masterName ?? MasterName
             };
-            if(ControllerContext == null)
+
+            if (ControllerContext == null)
                 CreateControllerContext();
+
             result.ExecuteResult(ControllerContext, MailerName);
             return result.Output;
         }
@@ -182,7 +182,6 @@ namespace Mvc.Mailer
             return ViewExists(viewName, masterName);
         }
 
-
         /// <summary>
         /// Returns true if both text and html views are present
         /// </summary>
@@ -264,7 +263,6 @@ namespace Mvc.Mailer
             return linkedResource;
         }
 
-
         private ControllerContext CreateControllerContext()
         {
             var routeData = RouteTable.Routes.GetRouteData(CurrentHttpContext);
@@ -282,7 +280,6 @@ namespace Mvc.Mailer
                 return this.GetType().Name;;
             }
         }
-
 
         public virtual HttpContextBase CurrentHttpContext
         {

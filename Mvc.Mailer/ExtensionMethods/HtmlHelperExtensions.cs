@@ -14,11 +14,9 @@ namespace Mvc.Mailer
         /// <param name="contentId">e.g. logo</param>
         /// <param name="alt">e.g. Company Logo</param>
         /// <returns><img src="cid:logo" alt="Company Logo"/></returns>
-        public static IHtmlString InlineImage(this HtmlHelper htmlHelper, string contentId, string alt = "")
+        public static string InlineImage(this HtmlHelper htmlHelper, string contentId, string alt = "")
         {
-            return htmlHelper.Raw(string.Format("<img src=\"cid:{0}\" alt=\"{1}\"/>", contentId, alt));
+            return String.Format("<img src=\"cid:{0}\" alt=\"{1}\"/>", contentId, alt);
         }
-
     }
-
 }

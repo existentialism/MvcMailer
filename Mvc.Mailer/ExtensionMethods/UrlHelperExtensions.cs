@@ -19,11 +19,14 @@ namespace Mvc.Mailer
         public static string Abs(this UrlHelper urlHelper, string relativeOrAbsoluteUrl)
         {
             var uri = new Uri(relativeOrAbsoluteUrl, UriKind.RelativeOrAbsolute);
+
             if (uri.IsAbsoluteUri)
             {
                 return relativeOrAbsoluteUrl;
             }
+
             Uri combinedUri;
+
             if (Uri.TryCreate(BaseUrl(urlHelper), relativeOrAbsoluteUrl, out combinedUri))
             {
                 return combinedUri.AbsoluteUri;
@@ -38,13 +41,12 @@ namespace Mvc.Mailer
             string baseUrl = ConfigurationManager.AppSettings[BASE_URL_KEY];
             
             //No configuration given, so use the one from the context
-            if(string.IsNullOrWhiteSpace(baseUrl)){
-                baseUrl =  urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority);
+            if (String.IsNullOrEmpty(baseUrl))
+						{
+                baseUrl = urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority);
             }
             
             return new Uri(baseUrl); 
         }
-
     }
-
 }
